@@ -1,4 +1,6 @@
 Assistente de Academia
+
+
 Este é um aplicativo desktop simples desenvolvido em Python com tkinter e pandas que atua como um assistente de academia. Ele calcula o Índice de Massa Corporal (IMC) do usuário e, com base nessa avaliação, sugere exercícios físicos personalizados.
 
 Funcionalidades
@@ -35,8 +37,7 @@ Arquivo de Dados (exercicios.csv)
 O programa espera um arquivo exercicios.csv na mesma pasta do script principal. Este arquivo deve conter os dados dos exercícios. Um exemplo de estrutura e dados para exercicios.csv é fornecido abaixo:
 
 Nome,Grupo,Nivel,DemandaEnergetica
-Corrida (30 min),Corpo Inteiro,Avançado,Alta
-HIIT - Treino Intervalado (20 min),Corpo Inteiro,Avançado,Alta
+
 Pular Corda (25 min),Corpo Inteiro,Intermediário,Alta
 Natação (45 min),Corpo Inteiro,Avançado,Alta
 Ciclismo (40 min),Pernas,Intermediário,Alta
@@ -44,21 +45,7 @@ Supino Reto com Halteres,Peito,Básico,Baixa
 Flexão de Braço,Peito,Básico,Baixa
 Crucifixo com Halteres,Peito,Intermediário,Baixa
 Remada Curvada com Barra,Costas,Intermediário,Baixa
-Puxada Frontal (Pulley),Costas,Básico,Baixa
-Remada Cavalinho,Costas,Avançado,Baixa
-Agachamento Livre,Pernas,Básico,Baixa
-Leg Press,Pernas,Intermediário,Baixa
-Afundo com Halteres,Pernas,Básico,Baixa
-Desenvolvimento com Halteres,Ombros,Intermediário,Baixa
-Elevação Lateral,Ombros,Básico,Baixa
-Remada Alta,Ombros,Intermediário,Baixa
-Rosca Direta com Barra,Bíceps,Básico,Baixa
-Rosca Alternada com Halteres,Bíceps,Intermediário,Baixa
-Tríceps Testa,Tríceps,Básico,Baixa
-Extensão de Tríceps na Polia,Tríceps,Intermediário,Baixa
-Prancha,Abdômen,Básico,Baixa
-Abdominal Remador,Abdômen,Intermediário,Baixa
-Elevação de Pernas,Abdômen,Avançado,Baixa
+
 
 Crie um arquivo chamado exercicios.csv com este conteúdo e salve-o no mesmo diretório do seu script gym_assistant_tkinter.py.
 
