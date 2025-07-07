@@ -1,73 +1,35 @@
-Nome,Grupo,Nivel,DemandaEnergetica
-Supino reto,Peito,Básico,Moderada
-Flexão de braço,Peito,Básico,Moderada
-Peck Deck,Peito,Básico,Moderada
-Supino inclinado com halteres,Peito,Intermediário,Moderada
-Crucifixo inclinado,Peito,Intermediário,Moderada
-Crossover na polia,Peito,Intermediário,Alta
-Supino declinado,Peito,Avançado,Alta
-Crucifixo com halteres,Peito,Avançado,Alta
-Flexão com palmas,Peito,Avançado,Alta
-Puxada frente,Costas,Básico,Moderada
-Remada unilateral com halteres,Costas,Básico,Moderada
-Pullover,Costas,Básico,Moderada
-Remada baixa,Costas,Intermediário,Moderada
-Puxada atrás,Costas,Intermediário,Moderada
-Remada cavalinho,Costas,Intermediário,Alta
-Barra fixa,Costas,Avançado,Alta
-Remada curvada com barra,Costas,Avançado,Alta
-Levantamento terra,Costas,Avançado,Alta
-Agachamento livre,Pernas,Básico,Moderada
-Cadeira extensora,Pernas,Básico,Moderada
-Mesa flexora,Pernas,Básico,Moderada
-Avanço com halteres,Pernas,Intermediário,Moderada
-Cadeira adutora,Pernas,Intermediário,Moderada
-Agachamento sumô,Pernas,Intermediário,Alta
-Agachamento com barra frontal,Pernas,Avançado,Alta
-Stiff,Pernas,Avançado,Alta
-Passada afundo com barra,Pernas,Avançado,Alta
-Elevação lateral,Ombros,Básico,Moderada
-Desenvolvimento com halteres,Ombros,Básico,Moderada
-Elevação frontal com barra,Ombros,Básico,Moderada
-Desenvolvimento Arnold,Ombros,Intermediário,Moderada
-Crucifixo inverso na máquina,Ombros,Intermediário,Moderada
-Remada alta com barra,Ombros,Intermediário,Alta
-Desenvolvimento militar,Ombros,Avançado,Alta
-Elevação lateral inclinada,Ombros,Avançado,Alta
-Face pull,Ombros,Avançado,Alta
-Rosca direta,Bíceps,Básico,Moderada
-Rosca alternada,Bíceps,Básico,Moderada
-Rosca concentrada,Bíceps,Básico,Moderada
-Rosca martelo,Bíceps,Intermediário,Moderada
-Rosca 21,Bíceps,Intermediário,Moderada
-Rosca scott,Bíceps,Intermediário,Alta
-Rosca inversa,Bíceps,Avançado,Alta
-Rosca com barra W,Bíceps,Avançado,Alta
-Rosca simultânea,Bíceps,Avançado,Alta
-Tríceps testa,Tríceps,Básico,Moderada
-Tríceps corda,Tríceps,Básico,Moderada
-Tríceps banco,Tríceps,Básico,Moderada
-Tríceps francês com halter,Tríceps,Intermediário,Moderada
-Tríceps na polia alta,Tríceps,Intermediário,Moderada
-Tríceps coice com halteres,Tríceps,Intermediário,Alta
-Mergulho em barras paralelas,Tríceps,Avançado,Alta
-Tríceps testa com barra W,Tríceps,Avançado,Alta
-Tríceps unilateral no cross,Tríceps,Avançado,Alta
-Prancha abdominal,Abdômen,Básico,Moderada
-Abdominal supra no solo,Abdômen,Básico,Moderada
-Elevação de pernas deitado,Abdômen,Básico,Moderada
-Abdominal máquina,Abdômen,Intermediário,Moderada
-Abdominal infra com bola,Abdômen,Intermediário,Moderada
-Abdominal oblíquo com halter,Abdômen,Intermediário,Alta
-Prancha com peso,Abdômen,Avançado,Alta
-Abdominal V,Abdômen,Avançado,Alta
-Elevação de pernas na barra,Abdômen,Avançado,Alta
-Caminhada rápida,Aeróbico,Básico,Alta
-Polichinelo,Aeróbico,Básico,Alta
-Escada ergométrica,Aeróbico,Básico,Alta
-Corrida,Aeróbico,Intermediário,Alta
-HIIT leve,Aeróbico,Intermediário,Alta
-Bike ergométrica,Aeróbico,Intermediário,Alta
-Corrida com inclinação,Aeróbico,Avançado,Alta
-Burpee,Aeróbico,Avançado,Alta
-Pular corda,Aeróbico,Avançado,Alta
+Nome,Grupo,Nivel,DemandaEnergetica,Tipo
+Corrida (30 min),Aeróbico,Avançado,Alta,Cardio
+HIIT (20 min),Aeróbico,Avançado,Alta,Cardio
+Natação (45 min),Aeróbico,Avançado,Alta,Cardio
+Ciclismo (40 min),Aeróbico,Intermediário,Alta,Cardio
+Supino Reto com Halteres,Peito,Básico,Baixa,Composto
+Flexão de Braço,Peito,Básico,Baixa,Composto
+Crucifixo com Halteres,Peito,Intermediário,Baixa,Isolado
+Voador,Peito,Básico,Baixa,Isolado
+Supino Inclinado Halteres,Peito,Intermediário,Baixa,Composto
+Remada Curvada com Barra,Costas,Intermediário,Baixa,Composto
+Puxada Frontal (Pulley),Costas,Básico,Baixa,Composto
+Remada Cavalinho,Costas,Avançado,Baixa,Composto
+Levantamento Terra,Costas,Avançado,Alta,Composto
+Remada com Halteres,Costas,Intermediário,Baixa,Composto
+Agachamento Livre,Pernas,Básico,Baixa,Composto
+Leg Press,Pernas,Intermediário,Baixa,Composto
+Afundo com Halteres,Pernas,Básico,Baixa,Composto
+Cadeira Extensora,Pernas,Básico,Baixa,Isolado
+Mesa Flexora,Pernas,Básico,Baixa,Isolado
+Panturrilha em pé,Pernas,Básico,Baixa,Isolado
+Desenvolvimento com Halteres,Ombros,Intermediário,Baixa,Composto
+Elevação Lateral,Ombros,Básico,Baixa,Isolado
+Remada Alta,Ombros,Intermediário,Baixa,Composto
+Elevação Frontal,Ombros,Básico,Baixa,Isolado
+Rosca Direta com Barra,Bíceps,Básico,Baixa,Isolado
+Rosca Alternada com Halteres,Bíceps,Intermediário,Baixa,Isolado
+Rosca Concentrada,Bíceps,Intermediário,Baixa,Isolado
+Tríceps Testa,Tríceps,Básico,Baixa,Isolado
+Extensão de Tríceps na Polia,Tríceps,Intermediário,Baixa,Isolado
+Coice com Halteres,Tríceps,Básico,Baixa,Isolado
+Prancha,Abdômen,Básico,Baixa,Composto
+Abdominal Remador,Abdômen,Intermediário,Baixa,Isolado
+Elevação de Pernas,Abdômen,Avançado,Baixa,Isolado
+Abdominal Crunch,Abdômen,Básico,Baixa,Isolado

@@ -10,36 +10,26 @@ class GymAssistantApp:
         master.geometry("800x700")
         master.resizable(False, False)
 
-        # Estilos - Paleta de cores azul
+        # Estilos
         self.style = ttk.Style()
         self.style.theme_use('clam') # Um tema moderno para ttk
-
-        # Cores principais
-        self.primary_blue = '#2196F3' # Blue 500
-        self.dark_blue = '#1976D2'    # Blue 700
-        self.light_blue = '#E3F2FD'   # Blue 50
-        self.medium_blue = '#BBDEFB'  # Blue 100
-        self.darker_blue = '#1565C0'  # Blue 800
-
-        self.style.configure('TFrame', background=self.light_blue)
-        self.style.configure('TLabel', background=self.light_blue, font=('Arial', 11), foreground=self.dark_blue)
+        self.style.configure('TFrame', background='#e0f7fa') # Light Cyan
+        self.style.configure('TLabel', background='#e0f7fa', font=('Arial', 11))
         self.style.configure('TEntry', font=('Arial', 11))
-        self.style.configure('TButton', font=('Arial', 11, 'bold'), background=self.primary_blue, foreground='white', borderwidth=0, relief='raised')
-        self.style.map('TButton', background=[('active', self.darker_blue)])
+        self.style.configure('TButton', font=('Arial', 11, 'bold'), background='#00796b', foreground='white', borderwidth=0, relief='raised') # Teal
+        self.style.map('TButton', background=[('active', '#004d40')])
         self.style.configure('TCombobox', font=('Arial', 11))
-        self.style.configure('TNotebook.Tab', font=('Arial', 10, 'bold'), background=self.medium_blue, foreground=self.dark_blue)
-        self.style.map('TNotebook.Tab', background=[('selected', self.primary_blue)], foreground=[('selected', 'white')])
-        self.style.configure('Treeview.Heading', font=('Arial', 10, 'bold'), background=self.darker_blue, foreground='white')
+        self.style.configure('TNotebook.Tab', font=('Arial', 10, 'bold'), background='#b2dfdb', foreground='#004d40')
+        self.style.map('TNotebook.Tab', background=[('selected', '#00796b')], foreground=[('selected', 'white')])
+        self.style.configure('Treeview.Heading', font=('Arial', 10, 'bold'), background='#004d40', foreground='white')
         self.style.configure('Treeview', font=('Arial', 10), rowheight=25)
 
         # Carregar dados dos exercícios
         try:
             self.df_exercicios = pd.read_csv("exercicios.csv")
-            # VERIFICAÇÃO ADICIONADA: Garante que as colunas necessárias existem
-            required_columns = ["Nome", "Grupo", "Nivel", "DemandaEnergetica", "Tipo"]
-            if not all(col in self.df_exercicios.columns for col in required_columns):
-                missing_cols = [col for col in required_columns if col not in self.df_exercicios.columns]
-                messagebox.showerror("Erro de Dados", f"O arquivo 'exercicios.csv' está faltando as seguintes colunas: {', '.join(missing_cols)}. Por favor, verifique o arquivo e o cabeçalho.")
+            # VERIFICAÇÃO ADICIONADA: Garante que a coluna 'Tipo' existe
+            if 'Tipo' not in self.df_exercicios.columns:
+                messagebox.showerror("Erro de Dados", "O arquivo 'exercicios.csv' não contém a coluna 'Tipo'. Por favor, verifique o arquivo e certifique-se de que o cabeçalho 'Tipo' está presente.")
                 master.destroy()
                 return
         except FileNotFoundError:
@@ -58,18 +48,6 @@ class GymAssistantApp:
         self.ficha_semanal = {}
         self.df_filtrado = pd.DataFrame()
 
-        # Variável para armazenar a imagem, se carregada
-        self.gym_image = None
-        # Tenta carregar uma imagem para a tela de boas-vindas
-        try:
-            # Substitua 'caminho/para/sua/imagem_academia.png' pelo caminho real da sua imagem
-            # Ex: self.gym_image = tk.PhotoImage(file="assets/gym_background.png")
-            # Para este ambiente, usaremos um placeholder visual ou emoji
-            pass
-        except Exception as e:
-            print(f"Não foi possível carregar a imagem de fundo: {e}")
-            self.gym_image = None # Garante que a imagem não seja usada se houver erro
-
         self.show_welcome_screen()
 
     def show_welcome_screen(self):
@@ -79,24 +57,11 @@ class GymAssistantApp:
         self.welcome_frame = ttk.Frame(self.master, padding="50 50 50 50", style='TFrame')
         self.welcome_frame.pack(expand=True, fill=tk.BOTH)
 
-        # Adiciona um Canvas para ter mais controle sobre a posição de elementos e possível imagem
-        canvas = tk.Canvas(self.welcome_frame, bg=self.light_blue, highlightthickness=0)
-        canvas.pack(expand=True, fill=tk.BOTH)
+        self.welcome_title = ttk.Label(self.welcome_frame, text="GYM Assistant", font=('Arial', 32, 'bold'), foreground='#004d40', background='#e0f7fa')
+        self.welcome_title.pack(pady=50)
 
-        # Placeholder para imagem de fundo (se você tiver uma)
-        # if self.gym_image:
-        #     canvas.create_image(self.master.winfo_width()/2, self.master.winfo_height()/2, image=self.gym_image, anchor=tk.CENTER)
-        # else:
-        #     # Desenha um retângulo para simular um fundo, ou usa um emoji grande
-        #     canvas.create_text(self.master.winfo_width()/2, self.master.winfo_height()/2 - 80, text="🏋️‍♂️", font=("Arial", 100), fill=self.dark_blue, anchor=tk.CENTER)
-
-
-        self.welcome_title = ttk.Label(canvas, text="GYM Assistant", font=('Arial', 32, 'bold'), foreground=self.dark_blue, background=self.light_blue)
-        canvas.create_window(400, 200, window=self.welcome_title, anchor=tk.CENTER) # Centraliza o título no canvas
-
-        self.start_button = ttk.Button(canvas, text="Iniciar", command=self.show_main_app)
-        canvas.create_window(400, 350, window=self.start_button, anchor=tk.CENTER) # Centraliza o botão no canvas
-
+        self.start_button = ttk.Button(self.welcome_frame, text="Iniciar", command=self.show_main_app)
+        self.start_button.pack(pady=20, ipadx=20, ipady=10)
 
     def show_main_app(self):
         """Exibe a tela principal da aplicação."""
@@ -117,7 +82,7 @@ class GymAssistantApp:
         self.gerar_button = ttk.Button(self.main_frame, text="Gerar Fichas de Treino", command=self.gerar_fichas)
         self.gerar_button.pack(pady=15, fill=tk.X)
 
-        self.imc_label = ttk.Label(self.main_frame, text="", font=('Arial', 12, 'bold'), background=self.light_blue, foreground=self.dark_blue)
+        self.imc_label = ttk.Label(self.main_frame, text="", font=('Arial', 12, 'bold'), background='#e0f7fa', foreground='#004d40')
         self.imc_label.pack(pady=5)
 
         # Notebook para as fichas diárias
@@ -157,7 +122,7 @@ class GymAssistantApp:
         """Cria um rótulo e um campo de entrada."""
         frame = ttk.Frame(parent_frame, style='TFrame')
         frame.pack(pady=2, fill=tk.X)
-        ttk.Label(frame, text=label_text, background=self.light_blue, foreground=self.dark_blue).pack(side=tk.LEFT, padx=5)
+        ttk.Label(frame, text=label_text, background='#e0f7fa').pack(side=tk.LEFT, padx=5)
         entry = ttk.Entry(frame)
         entry.pack(side=tk.RIGHT, expand=True, fill=tk.X, padx=5)
         setattr(self, entry_name, entry)
@@ -166,7 +131,7 @@ class GymAssistantApp:
         """Cria um rótulo e uma combobox."""
         frame = ttk.Frame(parent_frame, style='TFrame')
         frame.pack(pady=2, fill=tk.X)
-        ttk.Label(frame, text=label_text, background=self.light_blue, foreground=self.dark_blue).pack(side=tk.LEFT, padx=5)
+        ttk.Label(frame, text=label_text, background='#e0f7fa').pack(side=tk.LEFT, padx=5)
         var = tk.StringVar()
         combobox = ttk.Combobox(frame, textvariable=var, values=values, state="readonly")
         combobox.pack(side=tk.RIGHT, expand=True, fill=tk.X, padx=5)
@@ -182,10 +147,10 @@ class GymAssistantApp:
     def get_imc_classification(self, imc):
         """Retorna a classificação do IMC."""
         if imc < 18.5: return "Abaixo do peso"
-        elif 18.5 <= imc < 25: return "Peso normal"
-        elif 25 <= imc < 30: return "Sobrepeso"
-        elif 30 <= imc < 35: return "Obesidade Grau I"
-        elif 35 <= imc < 40: return "Obesidade Grau II"
+        elif 18.5 <= imc < 24.9: return "Peso normal"
+        elif 25 <= imc < 29.9: return "Sobrepeso"
+        elif 30 <= imc < 34.9: return "Obesidade Grau I"
+        elif 35 <= imc < 39.9: return "Obesidade Grau II"
         else: return "Obesidade Grau III (Mórbida)"
 
     def get_aerobic_time(self, imc_classification):
@@ -200,23 +165,10 @@ class GymAssistantApp:
     def gerar_fichas(self):
         """Gera as 5 fichas de treino semanais."""
         try:
-            idade = self.entrada_idade.get()
-            altura = self.entrada_altura.get()
-            peso = self.entrada_peso.get()
+            idade = int(self.entrada_idade.get())
+            altura = float(self.entrada_altura.get())
+            peso = float(self.entrada_peso.get())
             nivel = self.nivel_var.get()
-
-            # Validação de entrada para números
-            if not idade.isdigit() or not (altura.replace('.', '', 1).isdigit() and altura.count('.') <= 1) or not (peso.replace('.', '', 1).isdigit() and peso.count('.') <= 1):
-                messagebox.showerror("Erro de Entrada", "Por favor, insira valores numéricos válidos para Idade, Altura e Peso.")
-                return
-
-            idade = int(idade)
-            altura = float(altura)
-            peso = float(peso)
-
-            if altura <= 0 or peso <= 0 or idade <= 0:
-                messagebox.showerror("Erro de Entrada", "Idade, Altura e Peso devem ser valores positivos.")
-                return
 
             imc = self.calcular_imc(peso, altura)
             imc_classificacao = self.get_imc_classification(imc)
@@ -227,37 +179,45 @@ class GymAssistantApp:
             self.ficha_semanal = self.generate_weekly_plan(nivel, imc_classificacao, aerobic_time)
             self.display_weekly_plan()
 
+        except ValueError:
+            messagebox.showerror("Erro", "Por favor, insira números válidos para Idade, Altura e Peso.")
         except Exception as e:
-            messagebox.showerror("Erro", f"Ocorreu um erro inesperado: {e}")
+            messagebox.showerror("Erro", f"Ocorreu um erro: {e}")
 
     def generate_weekly_plan(self, nivel, imc_classificacao, aerobic_time):
         """Gera o plano de treino semanal com base no nível e IMC."""
         plan = {}
         # Filtra exercícios com base no nível. Inclui níveis mais básicos para maior variedade.
-        # Todos os exercícios relevantes ao nível são considerados, independentemente da demanda energética inicial
-        exercicios_base = self.df_exercicios[self.df_exercicios["Nivel"].isin([nivel, "Básico", "Intermediário"])].copy()
+        exercicios_filtrados = self.df_exercicios[self.df_exercicios["Nivel"].isin([nivel, "Básico", "Intermediário"])].copy()
+        
+        # Ajusta a demanda energética para obesos/sobrepeso
+        if "Obesidade" in imc_classificacao or "Sobrepeso" in imc_classificacao:
+            exercicios_filtrados_demanda = exercicios_filtrados[exercicios_filtrados["DemandaEnergetica"] == "Alta"]
+            if not exercicios_filtrados_demanda.empty:
+                exercicios_filtrados = exercicios_filtrados_demanda
+            else:
+                # Fallback se não houver exercícios de alta demanda para o nível
+                messagebox.showwarning("Aviso", "Não há exercícios de alta demanda para o nível selecionado. Usando exercícios gerais.")
 
-        # A demanda energética "Alta" será considerada na seleção de exercícios dentro das rotinas,
-        # mas não filtrará todo o DataFrame base de antemão.
 
         if nivel == "Básico":
-            plan = self._generate_abc_plan(exercicios_base, aerobic_time, imc_classificacao)
+            plan = self._generate_abc_plan(exercicios_filtrados, aerobic_time)
         elif nivel == "Intermediário":
-            plan = self._generate_ppl_upper_lower_plan(exercicios_base, aerobic_time, imc_classificacao)
+            plan = self._generate_ppl_upper_lower_plan(exercicios_filtrados, aerobic_time)
         elif nivel == "Avançado":
-            plan = self._generate_upper_lower_plan(exercicios_base, aerobic_time, imc_classificacao)
+            plan = self._generate_upper_lower_plan(exercicios_filtrados, aerobic_time)
         
         return plan
 
-    def _get_random_exercises(self, df, group, num_exercises, exercise_type=None, exclude_names=None, include_high_demand=False):
+    def _get_random_exercises(self, df, group, num_exercises, exercise_type=None, exclude_names=None):
         """
         Seleciona exercícios aleatórios de um grupo, com opção de tipo e exclusão.
         'exclude_names' é usado para evitar repetição DENTRO da mesma ficha diária.
-        'include_high_demand' prioriza exercícios de alta demanda se True.
         """
         if exclude_names is None:
-            exclude_names = set() # Usar set para melhor performance
+            exclude_names = []
 
+        # Filtra por grupo e exclui exercícios já selecionados para o dia
         filtered_df = df[(df["Grupo"] == group) & (~df["Nome"].isin(exclude_names))]
         
         if exercise_type:
@@ -268,73 +228,68 @@ class GymAssistantApp:
             else:
                 filtered_df = filtered_df[filtered_df["Tipo"] == exercise_type]
 
-        if include_high_demand and not filtered_df[filtered_df["DemandaEnergetica"] == "Alta"].empty:
-            # Prioriza exercícios de alta demanda se solicitado e disponível
-            high_demand_exercises = filtered_df[filtered_df["DemandaEnergetica"] == "Alta"]
-            # Tenta pegar o máximo possível de alta demanda, depois completa com outros
-            num_high_demand = min(len(high_demand_exercises), num_exercises)
-            selected_high_demand = high_demand_exercises.sample(num_high_demand, replace=False)
-            
-            remaining_exercises = filtered_df[~filtered_df["Nome"].isin(selected_high_demand["Nome"])]
-            num_remaining = num_exercises - num_high_demand
-            
-            if num_remaining > 0 and not remaining_exercises.empty:
-                selected_remaining = remaining_exercises.sample(min(len(remaining_exercises), num_remaining), replace=False)
-                selected = pd.concat([selected_high_demand, selected_remaining])
-            else:
-                selected = selected_high_demand
-        else:
-            # Seleciona aleatoriamente, sem substituição, o mínimo entre o número desejado
-            # e o número de exercícios disponíveis.
-            selected = filtered_df.sample(min(len(filtered_df), num_exercises), replace=False)
-            
-        if selected.empty:
+        if filtered_df.empty:
             return [] # Retorna lista vazia se não houver opções
 
+        # Seleciona aleatoriamente, sem substituição, o mínimo entre o número desejado
+        # e o número de exercícios disponíveis.
+        selected = filtered_df.sample(min(len(filtered_df), num_exercises), replace=False)
         return selected.to_dict('records')
 
-    def _generate_abc_plan(self, df, aerobic_time, imc_classificacao):
+    def _generate_abc_plan(self, df, aerobic_time):
         """Gera um plano de treino ABC (A: Peito/Tríceps/Abdômen, B: Costas/Bíceps, C: Pernas/Ombros)."""
         plan = {}
-        
-        # Determina se deve incluir alta demanda para sobrepeso/obesidade
-        include_high_demand_strength = "Obesidade" in imc_classificacao or "Sobrepeso" in imc_classificacao
 
         # Dia 1: Peito, Tríceps, Abdômen
-        day1_picked_names = set()
+        day1_picked_names = set() # Exercícios já selecionados para o Dia 1
         day1_exercises = []
         
-        day1_exercises.extend(self._get_random_exercises(df, "Peito", 2, "Composto", day1_picked_names, include_high_demand_strength))
-        day1_picked_names.update([ex["Nome"] for ex in day1_exercises])
-        
-        day1_exercises.extend(self._get_random_exercises(df, "Peito", 1, "Isolado", day1_picked_names, include_high_demand_strength))
-        day1_picked_names.update([ex["Nome"] for ex in day1_exercises])
+        exercises_peito_comp = self._get_random_exercises(df, "Peito", 2, "Composto", day1_picked_names)
+        day1_exercises.extend(exercises_peito_comp)
+        day1_picked_names.update([ex["Nome"] for ex in exercises_peito_comp])
 
-        day1_exercises.extend(self._get_random_exercises(df, "Tríceps", 2, None, day1_picked_names, include_high_demand_strength))
-        day1_picked_names.update([ex["Nome"] for ex in day1_exercises])
+        exercises_peito_iso = self._get_random_exercises(df, "Peito", 1, "Isolado", day1_picked_names)
+        day1_exercises.extend(exercises_peito_iso)
+        day1_picked_names.update([ex["Nome"] for ex in exercises_peito_iso])
 
-        day1_exercises.extend(self._get_random_exercises(df, "Abdômen", 1, None, day1_picked_names, include_high_demand_strength))
+        exercises_triceps = self._get_random_exercises(df, "Tríceps", 2, None, day1_picked_names)
+        day1_exercises.extend(exercises_triceps)
+        day1_picked_names.update([ex["Nome"] for ex in exercises_triceps])
+
+        exercises_abdomen = self._get_random_exercises(df, "Abdômen", 1, None, day1_picked_names)
+        day1_exercises.extend(exercises_abdomen)
+        day1_picked_names.update([ex["Nome"] for ex in exercises_abdomen])
+
         plan["Dia 1"] = day1_exercises + [{"Nome": f"Aeróbico ({aerobic_time})", "Grupo": "Cardio", "Séries": "-", "Repetições": "-", "Tipo": "Aeróbico"}]
 
         # Dia 2: Costas, Bíceps
         day2_picked_names = set()
         day2_exercises = []
-        day2_exercises.extend(self._get_random_exercises(df, "Costas", 3, "Composto", day2_picked_names, include_high_demand_strength))
-        day2_picked_names.update([ex["Nome"] for ex in day2_exercises])
+        exercises_costas_comp = self._get_random_exercises(df, "Costas", 3, "Composto", day2_picked_names)
+        day2_exercises.extend(exercises_costas_comp)
+        day2_picked_names.update([ex["Nome"] for ex in exercises_costas_comp])
 
-        day2_exercises.extend(self._get_random_exercises(df, "Bíceps", 2, None, day2_picked_names, include_high_demand_strength))
+        exercises_biceps = self._get_random_exercises(df, "Bíceps", 2, None, day2_picked_names)
+        day2_exercises.extend(exercises_biceps)
+        day2_picked_names.update([ex["Nome"] for ex in exercises_biceps])
+        
         plan["Dia 2"] = day2_exercises + [{"Nome": f"Aeróbico ({aerobic_time})", "Grupo": "Cardio", "Séries": "-", "Repetições": "-", "Tipo": "Aeróbico"}]
 
         # Dia 3: Pernas, Ombros
         day3_picked_names = set()
         day3_exercises = []
-        day3_exercises.extend(self._get_random_exercises(df, "Pernas", 3, "Composto", day3_picked_names, include_high_demand_strength))
-        day3_picked_names.update([ex["Nome"] for ex in day3_exercises])
+        exercises_pernas_comp = self._get_random_exercises(df, "Pernas", 3, "Composto", day3_picked_names)
+        day3_exercises.extend(exercises_pernas_comp)
+        day3_picked_names.update([ex["Nome"] for ex in exercises_pernas_comp])
 
-        day3_exercises.extend(self._get_random_exercises(df, "Pernas", 1, "Isolado", day3_picked_names, include_high_demand_strength))
-        day3_picked_names.update([ex["Nome"] for ex in day3_exercises])
+        exercises_pernas_iso = self._get_random_exercises(df, "Pernas", 1, "Isolado", day3_picked_names)
+        day3_exercises.extend(exercises_pernas_iso)
+        day3_picked_names.update([ex["Nome"] for ex in exercises_pernas_iso])
 
-        day3_exercises.extend(self._get_random_exercises(df, "Ombros", 2, "Composto", day3_picked_names, include_high_demand_strength))
+        exercises_ombros_comp = self._get_random_exercises(df, "Ombros", 2, "Composto", day3_picked_names)
+        day3_exercises.extend(exercises_ombros_comp)
+        day3_picked_names.update([ex["Nome"] for ex in exercises_ombros_comp])
+
         plan["Dia 3"] = day3_exercises + [{"Nome": f"Aeróbico ({aerobic_time})", "Grupo": "Cardio", "Séries": "-", "Repetições": "-", "Tipo": "Aeróbico"}]
 
         plan["Dia 4"] = [{"Nome": "Descanso Ativo / Aeróbico", "Grupo": "Descanso", "Séries": "-", "Repetições": "-", "Tipo": "Recuperação"}]
@@ -342,118 +297,116 @@ class GymAssistantApp:
 
         return plan
 
-    def _generate_ppl_upper_lower_plan(self, df, aerobic_time, imc_classificacao):
+    def _generate_ppl_upper_lower_plan(self, df, aerobic_time):
         """Gera um plano de treino PPL (Push/Pull/Legs) + Upper/Lower."""
         plan = {}
-        include_high_demand_strength = "Obesidade" in imc_classificacao or "Sobrepeso" in imc_classificacao
 
         # Dia 1: Push (Peito, Ombros, Tríceps)
         day1_picked_names = set()
         day1_exercises = []
-        day1_exercises.extend(self._get_random_exercises(df, "Peito", 2, "Composto", day1_picked_names, include_high_demand_strength))
+        day1_exercises.extend(self._get_random_exercises(df, "Peito", 2, "Composto", day1_picked_names))
         day1_picked_names.update([ex["Nome"] for ex in day1_exercises])
-        day1_exercises.extend(self._get_random_exercises(df, "Ombros", 1, "Composto", day1_picked_names, include_high_demand_strength))
+        day1_exercises.extend(self._get_random_exercises(df, "Ombros", 1, "Composto", day1_picked_names))
         day1_picked_names.update([ex["Nome"] for ex in day1_exercises])
-        day1_exercises.extend(self._get_random_exercises(df, "Tríceps", 2, None, day1_picked_names, include_high_demand_strength))
+        day1_exercises.extend(self._get_random_exercises(df, "Tríceps", 2, None, day1_picked_names))
         plan["Dia 1"] = day1_exercises + [{"Nome": f"Aeróbico ({aerobic_time})", "Grupo": "Cardio", "Séries": "-", "Repetições": "-", "Tipo": "Aeróbico"}]
 
         # Dia 2: Pull (Costas, Bíceps)
         day2_picked_names = set()
         day2_exercises = []
-        day2_exercises.extend(self._get_random_exercises(df, "Costas", 3, "Composto", day2_picked_names, include_high_demand_strength))
+        day2_exercises.extend(self._get_random_exercises(df, "Costas", 3, "Composto", day2_picked_names))
         day2_picked_names.update([ex["Nome"] for ex in day2_exercises])
-        day2_exercises.extend(self._get_random_exercises(df, "Bíceps", 2, None, day2_picked_names, include_high_demand_strength))
+        day2_exercises.extend(self._get_random_exercises(df, "Bíceps", 2, None, day2_picked_names))
         plan["Dia 2"] = day2_exercises + [{"Nome": f"Aeróbico ({aerobic_time})", "Grupo": "Cardio", "Séries": "-", "Repetições": "-", "Tipo": "Aeróbico"}]
 
         # Dia 3: Legs (Pernas, Abdômen)
         day3_picked_names = set()
         day3_exercises = []
-        day3_exercises.extend(self._get_random_exercises(df, "Pernas", 3, "Composto", day3_picked_names, include_high_demand_strength))
+        day3_exercises.extend(self._get_random_exercises(df, "Pernas", 3, "Composto", day3_picked_names))
         day3_picked_names.update([ex["Nome"] for ex in day3_exercises])
-        day3_exercises.extend(self._get_random_exercises(df, "Pernas", 1, "Isolado", day3_picked_names, include_high_demand_strength))
+        day3_exercises.extend(self._get_random_exercises(df, "Pernas", 1, "Isolado", day3_picked_names))
         day3_picked_names.update([ex["Nome"] for ex in day3_exercises])
-        day3_exercises.extend(self._get_random_exercises(df, "Abdômen", 2, None, day3_picked_names, include_high_demand_strength))
+        day3_exercises.extend(self._get_random_exercises(df, "Abdômen", 2, None, day3_picked_names))
         plan["Dia 3"] = day3_exercises + [{"Nome": f"Aeróbico ({aerobic_time})", "Grupo": "Cardio", "Séries": "-", "Repetições": "-", "Tipo": "Aeróbico"}]
 
         # Dia 4: Upper Body (Peito, Costas, Ombros, Bíceps, Tríceps)
         day4_picked_names = set()
         day4_exercises = []
-        day4_exercises.extend(self._get_random_exercises(df, "Peito", 1, "Composto", day4_picked_names, include_high_demand_strength))
+        day4_exercises.extend(self._get_random_exercises(df, "Peito", 1, "Composto", day4_picked_names))
         day4_picked_names.update([ex["Nome"] for ex in day4_exercises])
-        day4_exercises.extend(self._get_random_exercises(df, "Costas", 1, "Composto", day4_picked_names, include_high_demand_strength))
+        day4_exercises.extend(self._get_random_exercises(df, "Costas", 1, "Composto", day4_picked_names))
         day4_picked_names.update([ex["Nome"] for ex in day4_exercises])
-        day4_exercises.extend(self._get_random_exercises(df, "Ombros", 1, "Composto", day4_picked_names, include_high_demand_strength))
+        day4_exercises.extend(self._get_random_exercises(df, "Ombros", 1, "Composto", day4_picked_names))
         day4_picked_names.update([ex["Nome"] for ex in day4_exercises])
-        day4_exercises.extend(self._get_random_exercises(df, "Bíceps", 1, None, day4_picked_names, include_high_demand_strength))
+        day4_exercises.extend(self._get_random_exercises(df, "Bíceps", 1, None, day4_picked_names))
         day4_picked_names.update([ex["Nome"] for ex in day4_exercises])
-        day4_exercises.extend(self._get_random_exercises(df, "Tríceps", 1, None, day4_picked_names, include_high_demand_strength))
+        day4_exercises.extend(self._get_random_exercises(df, "Tríceps", 1, None, day4_picked_names))
         plan["Dia 4"] = day4_exercises + [{"Nome": f"Aeróbico ({aerobic_time})", "Grupo": "Cardio", "Séries": "-", "Repetições": "-", "Tipo": "Aeróbico"}]
 
         # Dia 5: Lower Body (Pernas, Abdômen)
         day5_picked_names = set()
         day5_exercises = []
-        day5_exercises.extend(self._get_random_exercises(df, "Pernas", 2, "Composto", day5_picked_names, include_high_demand_strength))
+        day5_exercises.extend(self._get_random_exercises(df, "Pernas", 2, "Composto", day5_picked_names))
         day5_picked_names.update([ex["Nome"] for ex in day5_exercises])
-        day5_exercises.extend(self._get_random_exercises(df, "Abdômen", 2, None, day5_picked_names, include_high_demand_strength))
+        day5_exercises.extend(self._get_random_exercises(df, "Abdômen", 2, None, day5_picked_names))
         plan["Dia 5"] = day5_exercises + [{"Nome": f"Aeróbico ({aerobic_time})", "Grupo": "Cardio", "Séries": "-", "Repetições": "-", "Tipo": "Aeróbico"}]
 
         return plan
 
-    def _generate_upper_lower_plan(self, df, aerobic_time, imc_classificacao):
+    def _generate_upper_lower_plan(self, df, aerobic_time):
         """Gera um plano de treino Upper/Lower para avançados."""
         plan = {}
-        include_high_demand_strength = "Obesidade" in imc_classificacao or "Sobrepeso" in imc_classificacao
 
         # Dia 1: Upper Body
         day1_picked_names = set()
         day1_exercises = []
-        day1_exercises.extend(self._get_random_exercises(df, "Peito", 2, "Composto", day1_picked_names, include_high_demand_strength))
+        day1_exercises.extend(self._get_random_exercises(df, "Peito", 2, "Composto", day1_picked_names))
         day1_picked_names.update([ex["Nome"] for ex in day1_exercises])
-        day1_exercises.extend(self._get_random_exercises(df, "Costas", 2, "Composto", day1_picked_names, include_high_demand_strength))
+        day1_exercises.extend(self._get_random_exercises(df, "Costas", 2, "Composto", day1_picked_names))
         day1_picked_names.update([ex["Nome"] for ex in day1_exercises])
-        day1_exercises.extend(self._get_random_exercises(df, "Ombros", 1, "Composto", day1_picked_names, include_high_demand_strength))
+        day1_exercises.extend(self._get_random_exercises(df, "Ombros", 1, "Composto", day1_picked_names))
         day1_picked_names.update([ex["Nome"] for ex in day1_exercises])
-        day1_exercises.extend(self._get_random_exercises(df, "Bíceps", 1, None, day1_picked_names, include_high_demand_strength))
+        day1_exercises.extend(self._get_random_exercises(df, "Bíceps", 1, None, day1_picked_names))
         day1_picked_names.update([ex["Nome"] for ex in day1_exercises])
-        day1_exercises.extend(self._get_random_exercises(df, "Tríceps", 1, None, day1_picked_names, include_high_demand_strength))
+        day1_exercises.extend(self._get_random_exercises(df, "Tríceps", 1, None, day1_picked_names))
         plan["Dia 1"] = day1_exercises + [{"Nome": f"Aeróbico ({aerobic_time})", "Grupo": "Cardio", "Séries": "-", "Repetições": "-", "Tipo": "Aeróbico"}]
 
         # Dia 2: Lower Body
         day2_picked_names = set()
         day2_exercises = []
-        day2_exercises.extend(self._get_random_exercises(df, "Pernas", 3, "Composto", day2_picked_names, include_high_demand_strength))
+        day2_exercises.extend(self._get_random_exercises(df, "Pernas", 3, "Composto", day2_picked_names))
         day2_picked_names.update([ex["Nome"] for ex in day2_exercises])
-        day2_exercises.extend(self._get_random_exercises(df, "Pernas", 2, "Isolado", day2_picked_names, include_high_demand_strength))
+        day2_exercises.extend(self._get_random_exercises(df, "Pernas", 2, "Isolado", day2_picked_names))
         day2_picked_names.update([ex["Nome"] for ex in day2_exercises])
-        day2_exercises.extend(self._get_random_exercises(df, "Abdômen", 2, None, day2_picked_names, include_high_demand_strength))
+        day2_exercises.extend(self._get_random_exercises(df, "Abdômen", 2, None, day2_picked_names))
         plan["Dia 2"] = day2_exercises + [{"Nome": f"Aeróbico ({aerobic_time})", "Grupo": "Cardio", "Séries": "-", "Repetições": "-", "Tipo": "Aeróbico"}]
 
         # Dia 3: Upper Body (Variação)
         day3_picked_names = set()
         day3_exercises = []
-        day3_exercises.extend(self._get_random_exercises(df, "Peito", 1, "Composto", day3_picked_names, include_high_demand_strength))
+        day3_exercises.extend(self._get_random_exercises(df, "Peito", 1, "Composto", day3_picked_names))
         day3_picked_names.update([ex["Nome"] for ex in day3_exercises])
-        day3_exercises.extend(self._get_random_exercises(df, "Peito", 1, "Isolado", day3_picked_names, include_high_demand_strength))
+        day3_exercises.extend(self._get_random_exercises(df, "Peito", 1, "Isolado", day3_picked_names))
         day3_picked_names.update([ex["Nome"] for ex in day3_exercises])
-        day3_exercises.extend(self._get_random_exercises(df, "Costas", 1, "Composto", day3_picked_names, include_high_demand_strength))
+        day3_exercises.extend(self._get_random_exercises(df, "Costas", 1, "Composto", day3_picked_names))
         day3_picked_names.update([ex["Nome"] for ex in day3_exercises])
-        day3_exercises.extend(self._get_random_exercises(df, "Costas", 1, "Isolado", day3_picked_names, include_high_demand_strength))
+        day3_exercises.extend(self._get_random_exercises(df, "Costas", 1, "Isolado", day3_picked_names))
         day3_picked_names.update([ex["Nome"] for ex in day3_exercises])
-        day3_exercises.extend(self._get_random_exercises(df, "Ombros", 1, "Isolado", day3_picked_names, include_high_demand_strength))
+        day3_exercises.extend(self._get_random_exercises(df, "Ombros", 1, "Isolado", day3_picked_names))
         day3_picked_names.update([ex["Nome"] for ex in day3_exercises])
-        day3_exercises.extend(self._get_random_exercises(df, "Bíceps", 1, None, day3_picked_names, include_high_demand_strength))
+        day3_exercises.extend(self._get_random_exercises(df, "Bíceps", 1, None, day3_picked_names))
         day3_picked_names.update([ex["Nome"] for ex in day3_exercises])
-        day3_exercises.extend(self._get_random_exercises(df, "Tríceps", 1, None, day3_picked_names, include_high_demand_strength))
+        day3_exercises.extend(self._get_random_exercises(df, "Tríceps", 1, None, day3_picked_names))
         plan["Dia 3"] = day3_exercises + [{"Nome": f"Aeróbico ({aerobic_time})", "Grupo": "Cardio", "Séries": "-", "Repetições": "-", "Tipo": "Aeróbico"}]
 
         # Dia 4: Lower Body (Variação)
         day4_picked_names = set()
         day4_exercises = []
-        day4_exercises.extend(self._get_random_exercises(df, "Pernas", 2, "Composto", day4_picked_names, include_high_demand_strength))
+        day4_exercises.extend(self._get_random_exercises(df, "Pernas", 2, "Composto", day4_picked_names))
         day4_picked_names.update([ex["Nome"] for ex in day4_exercises])
-        day4_exercises.extend(self._get_random_exercises(df, "Pernas", 1, "Isolado", day4_picked_names, include_high_demand_strength))
+        day4_exercises.extend(self._get_random_exercises(df, "Pernas", 1, "Isolado", day4_picked_names))
         day4_picked_names.update([ex["Nome"] for ex in day4_exercises])
-        day4_exercises.extend(self._get_random_exercises(df, "Abdômen", 1, None, day4_picked_names, include_high_demand_strength))
+        day4_exercises.extend(self._get_random_exercises(df, "Abdômen", 1, None, day4_picked_names))
         plan["Dia 4"] = day4_exercises + [{"Nome": f"Aeróbico ({aerobic_time})", "Grupo": "Cardio", "Séries": "-", "Repetições": "-", "Tipo": "Aeróbico"}]
 
         # Dia 5: Full Body / Descanso Ativo
