@@ -1,35 +1,35 @@
-Nome,Grupo,Nivel,DemandaEnergetica,Tipo
-Corrida (30 min),Aeróbico,Avançado,Alta,Cardio
-HIIT (20 min),Aeróbico,Avançado,Alta,Cardio
-Natação (45 min),Aeróbico,Avançado,Alta,Cardio
-Ciclismo (40 min),Aeróbico,Intermediário,Alta,Cardio
-Supino Reto com Halteres,Peito,Básico,Baixa,Composto
-Flexão de Braço,Peito,Básico,Baixa,Composto
-Crucifixo com Halteres,Peito,Intermediário,Baixa,Isolado
-Voador,Peito,Básico,Baixa,Isolado
-Supino Inclinado Halteres,Peito,Intermediário,Baixa,Composto
-Remada Curvada com Barra,Costas,Intermediário,Baixa,Composto
-Puxada Frontal (Pulley),Costas,Básico,Baixa,Composto
-Remada Cavalinho,Costas,Avançado,Baixa,Composto
-Levantamento Terra,Costas,Avançado,Alta,Composto
-Remada com Halteres,Costas,Intermediário,Baixa,Composto
-Agachamento Livre,Pernas,Básico,Baixa,Composto
-Leg Press,Pernas,Intermediário,Baixa,Composto
-Afundo com Halteres,Pernas,Básico,Baixa,Composto
-Cadeira Extensora,Pernas,Básico,Baixa,Isolado
-Mesa Flexora,Pernas,Básico,Baixa,Isolado
-Panturrilha em pé,Pernas,Básico,Baixa,Isolado
-Desenvolvimento com Halteres,Ombros,Intermediário,Baixa,Composto
-Elevação Lateral,Ombros,Básico,Baixa,Isolado
-Remada Alta,Ombros,Intermediário,Baixa,Composto
-Elevação Frontal,Ombros,Básico,Baixa,Isolado
-Rosca Direta com Barra,Bíceps,Básico,Baixa,Isolado
-Rosca Alternada com Halteres,Bíceps,Intermediário,Baixa,Isolado
-Rosca Concentrada,Bíceps,Intermediário,Baixa,Isolado
-Tríceps Testa,Tríceps,Básico,Baixa,Isolado
-Extensão de Tríceps na Polia,Tríceps,Intermediário,Baixa,Isolado
-Coice com Halteres,Tríceps,Básico,Baixa,Isolado
-Prancha,Abdômen,Básico,Baixa,Composto
-Abdominal Remador,Abdômen,Intermediário,Baixa,Isolado
-Elevação de Pernas,Abdômen,Avançado,Baixa,Isolado
-Abdominal Crunch,Abdômen,Básico,Baixa,Isolado
+Nome,Grupo,Nivel,DemandaEnergetica,Tipo,DescricaoDetalhada,GifURL
+Corrida (30 min),Aeróbico,Avançado,Alta,Cardio,"Corra em ritmo moderado, mantendo a frequência cardíaca elevada.","assets/corrida.gif"
+HIIT (20 min),Aeróbico,Avançado,Alta,Cardio,"Realize ciclos de alta intensidade seguidos por descanso ativo.","assets/hiit.gif"
+Natação (45 min),Aeróbico,Avançado,Alta,Cardio,"Nade continuamente, variando os estilos para trabalhar diferentes músculos.","assets/natacao.gif"
+Ciclismo (40 min),Aeróbico,Intermediário,Alta,Cardio,"Pedale em ritmo constante ou com variações de intensidade.","assets/ciclismo.gif"
+Supino Reto com Halteres,Peito,Básico,Baixa,Composto,"Deite-se no banco, halteres acima do peito, desça controladamente e empurre.","assets/supino_halteres.gif"
+Flexão de Braço,Peito,Básico,Baixa,Composto,"Mãos no chão, largura dos ombros, desça o peito em direção ao chão e empurre.","assets/flexao.gif"
+Crucifixo com Halteres,Peito,Intermediário,Baixa,Isolado,"Deite-se no banco, braços estendidos com halteres, abra os braços lateralmente e retorne.","assets/crucifixo.gif"
+Voador,Peito,Básico,Baixa,Isolado,"Sente-se na máquina, ajuste o encosto, junte as alças à frente do corpo.","assets/voador.gif"
+Supino Inclinado Halteres,Peito,Intermediário,Baixa,Composto,"No banco inclinado, halteres acima do peito, desça e empurre.","assets/supino_inclinado.gif"
+Remada Curvada com Barra,Costas,Intermediário,Baixa,Composto,"Incline o tronco, segure a barra, puxe em direção ao abdômen, contraindo as costas.","assets/remada_curvada.gif"
+Puxada Frontal (Pulley),Costas,Básico,Baixa,Composto,"Sente-se na máquina, puxe a barra em direção ao peito, apertando as escápulas.","assets/puxada_frontal.gif"
+Remada Cavalinho,Costas,Avançado,Baixa,Composto,"Apoie o peito, puxe a alça em direção ao abdômen, focando na contração das costas.","assets/remada_cavalinho.gif"
+Levantamento Terra,Costas,Avançado,Alta,Composto,"Barra no chão, agache, levante o peso usando pernas e costas, mantendo a coluna reta.","assets/levantamento_terra.gif"
+Remada com Halteres,Costas,Intermediário,Baixa,Composto,"Apoie uma mão e joelho no banco, puxe o halter em direção ao quadril.","assets/remada_halteres.gif"
+Agachamento Livre,Pernas,Básico,Baixa,Composto,"Com os pés na largura dos ombros, agache como se fosse sentar, mantendo a coluna reta.","assets/agachamento_livre.gif"
+Leg Press,Pernas,Intermediário,Baixa,Composto,"Sente-se na máquina, empurre a plataforma com os pés, estendendo as pernas.","assets/leg_press.gif"
+Afundo com Halteres,Pernas,Básico,Baixa,Composto,"Dê um passo à frente, abaixe o joelho de trás quase tocando o chão.","assets/afundo.gif"
+Cadeira Extensora,Pernas,Básico,Baixa,Isolado,"Sente-se na cadeira, estenda as pernas contra a resistência.","assets/cadeira_extensora.gif"
+Mesa Flexora,Pernas,Básico,Baixa,Isolado,"Deite-se na mesa, flexione as pernas, puxando a almofada em direção aos glúteos.","assets/mesa_flexora.gif"
+Panturrilha em pé,Pernas,Básico,Baixa,Isolado,"Fique em pé, eleve os calcanhares, contraindo as panturrilhas.","assets/panturrilha.gif"
+Desenvolvimento com Halteres,Ombros,Intermediário,Baixa,Composto,"Sente-se, halteres na altura dos ombros, empurre acima da cabeça.","assets/desenvolvimento_halteres.gif"
+Elevação Lateral,Ombros,Básico,Baixa,Isolado,"Com halteres nas mãos, levante os braços lateralmente até a altura dos ombros.","assets/elevacao_lateral.gif"
+Remada Alta,Ombros,Intermediário,Baixa,Composto,"Segure a barra, puxe em direção ao queixo, elevando os cotovelos.","assets/remada_alta.gif"
+Elevação Frontal,Ombros,Básico,Baixa,Isolado,"Com halteres nas mãos, levante os braços à frente até a altura dos ombros.","assets/elevacao_frontal.gif"
+Rosca Direta com Barra,Bíceps,Básico,Baixa,Isolado,"Segure a barra, flexione os cotovelos, levando a barra em direção aos ombros.","assets/rosca_direta.gif"
+Rosca Alternada com Halteres,Bíceps,Intermediário,Baixa,Isolado,"Com halteres, alterne a flexão dos cotovelos, girando as palmas.","assets/rosca_alternada.gif"
+Rosca Concentrada,Bíceps,Intermediário,Baixa,Isolado,"Sente-se, apoie o cotovelo na coxa, flexione o braço com o halter.","assets/rosca_concentrada.gif"
+Tríceps Testa,Tríceps,Básico,Baixa,Isolado,"Deite-se, segure o halter acima da cabeça, flexione os cotovelos levando o halter à testa.","assets/triceps_testa.gif"
+Extensão de Tríceps na Polia,Tríceps,Intermediário,Baixa,Isolado,"De frente para a polia, puxe a barra para baixo, estendendo os braços.","assets/extensao_polia.gif"
+Coice com Halteres,Tríceps,Básico,Baixa,Isolado,"Incline o tronco, braço flexionado, estenda o braço para trás, contraindo o tríceps.","assets/coice.gif"
+Prancha,Abdômen,Básico,Baixa,Composto,"Mantenha o corpo reto, apoiado nos antebraços e ponta dos pés.","assets/prancha.gif"
+Abdominal Remador,Abdômen,Intermediário,Baixa,Isolado,"Deite-se, sente-se e abrace os joelhos, retornando à posição inicial.","assets/abdominal_remador.gif"
+Elevação de Pernas,Abdômen,Avançado,Baixa,Isolado,"Deite-se, eleve as pernas retas em direção ao teto.","assets/elevacao_pernas.gif"
+Abdominal Crunch,Abdômen,Básico,Baixa,Isolado,"Deite-se, mãos na cabeça, eleve o tronco contraindo o abdômen.","assets/abdominal_crunch.gif"
