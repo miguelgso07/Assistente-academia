@@ -37,7 +37,7 @@ class GymAssistantApp:
 
         # Carregar dados dos exercícios
         try:
-            self.df_exercicios = pd.read_csv("exercicios.csv")
+            self.df_exercicios = pd.read_csv("data\exercicios.csv")
             required_columns = ["Nome", "Grupo", "Nivel", "DemandaEnergetica", "Tipo", "DescricaoDetalhada", "GifURL"]
             if not all(col in self.df_exercicios.columns for col in required_columns):
                 missing_cols = [col for col in required_columns if col not in self.df_exercicios.columns]
