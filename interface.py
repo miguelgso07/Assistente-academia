@@ -173,7 +173,7 @@ class GymAssistantApp:
         gif_label.pack(side=tk.RIGHT, padx=10, fill=tk.BOTH, expand=True)
 
         gif_manager = utils.GifManager(popup, gif_label)
-        gif_manager.load_and_play(details["GifURL"])
+        gif_manager.load_and_play(details["gifURl"])
 
         ttk.Button(content_frame, text="Fechar", command=popup.destroy).pack(pady=10)
 
